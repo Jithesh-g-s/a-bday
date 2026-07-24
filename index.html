@@ -136,7 +136,7 @@
     </style>
 </head>
 
-<body class="font-sans antialiased h-screen overflow-hidden flex flex-col relative max-w-md mx-auto shadow-2xl">
+<body class="font-sans antialiased h-[100dvh] overflow-hidden flex flex-col relative max-w-md mx-auto shadow-2xl">
 
     <!-- Top App Bar -->
     <header
@@ -213,7 +213,7 @@
     </main>
 
     <!-- Bottom Navigation -->
-    <nav class="absolute bottom-0 w-full glass-nav z-30 pb-safe">
+    <nav class="absolute bottom-0 w-full glass-nav z-30 pb-[env(safe-area-inset-bottom)]">
         <ul class="flex justify-around items-center p-3">
             <li>
                 <button onclick="switchView('start')"
