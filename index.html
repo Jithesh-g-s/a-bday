@@ -2,10 +2,410 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HBD Darling</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Our Love Story</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Feather Icons for lightweight modern icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
     
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rosegold: '#b76e79',
+                        champagne: '#f7e7ce',
+                        cream: '#fffdd0',
+                        softsurface: '#faf9f6',
+                        darkrose: '#8a4853',
+                        textmain: '#524345',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 25px -5px rgba(183, 110, 121, 0.15), 0 8px 10px -6px rgba(183, 110, 121, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #faf9f6;
+            color: #524345;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .view-container {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: translateY(10px);
+        }
+        
+        .view-container.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-nav {
+            background: rgba(250, 249, 246, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(183, 110, 121, 0.1);
+        }
+
+        .polaroid {
+            background: white;
+            padding: 12px 12px 36px 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        .polaroid:hover {
+            transform: scale(1.02) rotate(0deg);
+        }
+
+        /* Handwritten reveal animation */
+        .handwritten-line {
+            opacity: 0;
+            transform: translateY(5px);
+            animation: fadeInLine 1s forwards;
+        }
+        
+        @keyframes fadeInLine {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .letter-bg {
+            background-image: url('https://images.unsplash.com/photo-1520114887364-e4311029cfa7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Shimmer effect for surprise */
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 2.5s infinite;
+        }
+        @keyframes shimmer {
+            100% { left: 200%; }
+        }
+
+        .sparkle-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #b76e79;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+        
+        @keyframes sparkleAnim {
+            0% { transform: scale(0) translate(0, 0); opacity: 1; }
+            100% { transform: scale(1.5) translate(var(--tx), var(--ty)); opacity: 0; }
+        }
+
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased h-screen overflow-hidden flex flex-col relative max-w-md mx-auto shadow-2xl">
+
+    <!-- Top App Bar -->
+    <header class="w-full py-4 px-6 text-center z-20 bg-softsurface/90 backdrop-blur-md sticky top-0 border-b border-rosegold/10">
+        <h1 class="font-serif text-2xl font-semibold text-darkrose tracking-wide">Our Love Story</h1>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto relative pb-24 px-5">
+        
+        <!-- View 1: Open Me (Landing) -->
+        <div id="view-start" class="view-container active h-full flex flex-col items-center justify-center">
+            <div class="bg-white p-8 rounded-2xl shadow-soft text-center w-full relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i data-feather="heart" class="w-24 h-24 text-rosegold"></i>
+                </div>
+                <div class="w-16 h-16 bg-rosegold/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i data-feather="mail" class="text-rosegold w-8 h-8"></i>
+                </div>
+                <h2 class="font-serif text-3xl font-bold text-darkrose mb-3">Happy Birthday</h2>
+                <p class="text-textmain/80 mb-10 text-lg leading-relaxed">A message is waiting for you...</p>
+                <button onclick="switchView('memories')" class="shimmer bg-gradient-to-r from-rosegold to-darkrose text-white w-full py-4 rounded-xl font-semibold tracking-wider text-sm hover:shadow-lg transition-all active:scale-95 shadow-soft flex items-center justify-center gap-2">
+                    OPEN ME <i data-feather="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- View 2: Memory Lane -->
+        <div id="view-memories" class="view-container pt-6">
+            <div class="text-center mb-8">
+                <h2 class="font-serif text-2xl font-bold text-darkrose">Our Beautiful Moments</h2>
+                <p class="text-sm text-textmain/60 mt-2">A timeline of us.</p>
+            </div>
+            
+            <div class="space-y-8 pb-10">
+                <!-- Memory Card 1 -->
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Us" class="w-full h-64 object-cover rounded-sm mb-4">
+                    <p class="font-serif text-center text-lg italic text-darkrose">The day we met</p>
+                </div>
+                <!-- Memory Card 2 -->
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Coffee date" class="w-full h-64 object-cover rounded-sm mb-4">
+                    <p class="font-serif text-center text-lg italic text-darkrose">Our first trip</p>
+                </div>
+                
+                <button class="w-full py-4 mt-6 border border-dashed border-rosegold/40 text-rosegold rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-rosegold/5 transition-colors">
+                    <i data-feather="plus" class="w-4 h-4"></i> Add a Memory
+                </button>
+            </div>
+        </div>
+
+        <!-- View 3: Letter -->
+        <div id="view-letter" class="view-container pt-6 h-full flex flex-col">
+            <div class="w-full h-48 rounded-t-2xl letter-bg shadow-soft relative">
+                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent rounded-t-2xl"></div>
+            </div>
+            <div class="bg-white -mt-6 p-8 rounded-2xl shadow-soft flex-1 relative z-10 mb-8">
+                <div class="w-8 h-8 bg-champagne rounded-full flex items-center justify-center absolute -top-4 right-8 shadow-sm">
+                    <i data-feather="heart" class="text-darkrose w-4 h-4 fill-current"></i>
+                </div>
+                <div id="letter-content" class="font-serif text-lg leading-loose text-textmain space-y-4">
+                    <!-- Lines will be injected here via JS for animation -->
+                </div>
+            </div>
+        </div>
+
+        <!-- View 4: Surprise -->
+        <div id="view-surprise" class="view-container pt-6">
+            <div class="text-center mb-10">
+                <h2 class="font-serif text-3xl font-bold text-darkrose">Your Big Surprise</h2>
+                <p class="text-sm text-textmain/60 mt-2 tracking-wide uppercase">Today is all about you</p>
+            </div>
+
+            <div class="relative border-l-2 border-champagne ml-4 space-y-8 pb-10">
+                <!-- Event 1 -->
+                <div class="relative pl-6">
+                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-rosegold border-4 border-softsurface"></div>
+                    <div class="text-xs font-bold text-rosegold mb-1 tracking-wider">10:00 AM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-rosegold/10">
+                        <h4 class="font-serif font-semibold text-lg text-darkrose">Birthday Brunch</h4>
+                        <p class="text-sm text-textmain/80 mt-1">At your favorite spot downtown.</p>
+                    </div>
+                </div>
+                <!-- Event 2 -->
+                <div class="relative pl-6">
+                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-rosegold border-4 border-softsurface"></div>
+                    <div class="text-xs font-bold text-rosegold mb-1 tracking-wider">1:30 PM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-rosegold/10">
+                        <h4 class="font-serif font-semibold text-lg text-darkrose">Couples Massage</h4>
+                        <p class="text-sm text-textmain/80 mt-1">90 minutes of pure relaxation.</p>
+                    </div>
+                </div>
+                <!-- Event 3 -->
+                <div class="relative pl-6">
+                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-rosegold border-4 border-softsurface"></div>
+                    <div class="text-xs font-bold text-rosegold mb-1 tracking-wider">7:00 PM</div>
+                    
+                    <div id="surprise-reveal" class="bg-gradient-to-br from-rosegold to-darkrose p-1 rounded-xl cursor-pointer shadow-soft active:scale-95 transition-transform" onclick="revealSurprise(this)">
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg border border-white/20 text-center text-white h-32 flex flex-col items-center justify-center">
+                            <i data-feather="gift" class="w-8 h-8 mb-2 mx-auto"></i>
+                            <span class="font-medium tracking-wide">Tap to Reveal Dinner Plan</span>
+                        </div>
+                    </div>
+                    
+                    <div id="surprise-content" class="hidden bg-white p-5 rounded-xl shadow-soft border border-rosegold/20 text-center">
+                        <h4 class="font-serif font-semibold text-xl text-darkrose mb-2">Exclusive Dining</h4>
+                        <p class="text-sm text-textmain/80 mb-4">We're going to the Michelin-star restaurant you've been talking about.</p>
+                        <button class="bg-champagne/50 text-darkrose text-sm font-semibold py-2 px-6 rounded-full hover:bg-champagne transition-colors">
+                            View Tickets
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="absolute bottom-0 w-full glass-nav z-30 pb-safe">
+        <ul class="flex justify-around items-center p-3">
+            <li>
+                <button onclick="switchView('start')" class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors" data-target="start">
+                    <i data-feather="home" class="w-5 h-5"></i>
+                    <span class="text-[10px] font-medium tracking-wider">START</span>
+                </button>
+            </li>
+            <li>
+                <button onclick="switchView('memories')" class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors" data-target="memories">
+                    <i data-feather="image" class="w-5 h-5"></i>
+                    <span class="text-[10px] font-medium tracking-wider">GALLERY</span>
+                </button>
+            </li>
+            <li>
+                <button onclick="switchView('letter')" class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors" data-target="letter">
+                    <i data-feather="edit-2" class="w-5 h-5"></i>
+                    <span class="text-[10px] font-medium tracking-wider">LETTER</span>
+                </button>
+            </li>
+            <li>
+                <button onclick="switchView('surprise')" class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors" data-target="surprise">
+                    <i data-feather="star" class="w-5 h-5"></i>
+                    <span class="text-[10px] font-medium tracking-wider">SURPRISE</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Navigation Logic
+        function switchView(viewId) {
+            // Hide all views
+            document.querySelectorAll('.view-container').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Reset Nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-rosegold');
+                btn.classList.add('text-textmain/50');
+            });
+
+            // Show selected view
+            const targetView = document.getElementById('view-' + viewId);
+            if(targetView) {
+                targetView.classList.add('active');
+            }
+            
+            // Highlight active nav
+            const activeBtn = document.querySelector(`.nav-btn[data-target="${viewId}"]`);
+            if(activeBtn) {
+                activeBtn.classList.remove('text-textmain/50');
+                activeBtn.classList.add('text-rosegold');
+            }
+
+            // Trigger Letter Animation if letter view is selected
+            if(viewId === 'letter') {
+                animateLetter();
+            }
+        }
+
+        // Initially select the first view in nav
+        document.querySelector(`.nav-btn[data-target="start"]`).classList.remove('text-textmain/50');
+        document.querySelector(`.nav-btn[data-target="start"]`).classList.add('text-rosegold');
+
+        // Letter Animation Logic
+        const letterText = [
+            "My dearest darling,",
+            "Happy Birthday. I wanted to make something special just for you this year.",
+            "Looking back at our journey, every moment with you has felt like a dream. You bring so much light and joy into my life, more than words can express.",
+            "Today is all about celebrating the incredible person you are.",
+            "I love you endlessly.",
+            "Love, Alexander"
+        ];
+        
+        let letterAnimated = false;
+
+        function animateLetter() {
+            if(letterAnimated) return; // Only animate once
+            
+            const container = document.getElementById('letter-content');
+            container.innerHTML = ''; // Clear
+            
+            letterText.forEach((line, index) => {
+                const p = document.createElement('p');
+                p.textContent = line;
+                p.className = 'handwritten-line';
+                p.style.animationDelay = `${index * 0.8}s`;
+                
+                // Add extra spacing before the sign-off
+                if (index === letterText.length - 1) {
+                    p.classList.add('mt-6', 'text-right', 'font-italic');
+                }
+                
+                container.appendChild(p);
+            });
+            letterAnimated = true;
+        }
+
+        // Surprise Reveal Logic
+        function revealSurprise(element) {
+            // Create sparkles
+            for(let i=0; i<30; i++) {
+                createSparkle(element);
+            }
+            
+            // Hide the tap button
+            element.classList.add('hidden');
+            
+            // Show content
+            const content = document.getElementById('surprise-content');
+            content.classList.remove('hidden');
+            content.style.animation = 'fadeInLine 0.8s forwards';
+        }
+
+        function createSparkle(parent) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle-particle');
+            
+            const rect = parent.getBoundingClientRect();
+            
+            // Random position within the button
+            const startX = Math.random() * rect.width;
+            const startY = Math.random() * rect.height;
+            
+            // Random trajectory
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 50 + Math.random() * 100;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+            
+            sparkle.style.left = startX + 'px';
+            sparkle.style.top = startY + 'px';
+            sparkle.style.setProperty('--tx', tx + 'px');
+            sparkle.style.setProperty('--ty', ty + 'px');
+            sparkle.style.animation = `sparkleAnim ${0.5 + Math.random() * 0.5}s ease-out forwards`;
+            
+            // Colors
+            const colors = ['#b76e79', '#f7e7ce', '#fff'];
+            sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            parent.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
