@@ -115,20 +115,7 @@
             100% { left: 200%; }
         }
 
-        .sparkle-particle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background-color: #b76e79;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-        }
-        
-        @keyframes sparkleAnim {
-            0% { transform: scale(0) translate(0, 0); opacity: 1; }
-            100% { transform: scale(1.5) translate(var(--tx), var(--ty)); opacity: 0; }
-        }
+
 
         /* Hide scrollbar for clean UI */
         ::-webkit-scrollbar {
@@ -183,9 +170,7 @@
                     <p class="font-serif text-center text-lg italic text-darkrose">Our first trip</p>
                 </div>
                 
-                <button class="w-full py-4 mt-6 border border-dashed border-rosegold/40 text-rosegold rounded-xl font-medium flex items-center justify-center gap-2 hover:bg-rosegold/5 transition-colors">
-                    <i data-feather="plus" class="w-4 h-4"></i> Add a Memory
-                </button>
+
             </div>
         </div>
 
@@ -204,54 +189,7 @@
             </div>
         </div>
 
-        <!-- View 4: Surprise -->
-        <div id="view-surprise" class="view-container pt-6">
-            <div class="text-center mb-10">
-                <h2 class="font-serif text-3xl font-bold text-darkrose">Your Big Surprise</h2>
-                <p class="text-sm text-textmain/60 mt-2 tracking-wide uppercase">Today is all about you</p>
-            </div>
 
-            <div class="relative border-l-2 border-champagne ml-4 space-y-8 pb-10">
-                <!-- Event 1 -->
-                <div class="relative pl-6">
-                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-rosegold border-4 border-softsurface"></div>
-                    <div class="text-xs font-bold text-rosegold mb-1 tracking-wider">10:00 AM</div>
-                    <div class="bg-white p-4 rounded-xl shadow-sm border border-rosegold/10">
-                        <h4 class="font-serif font-semibold text-lg text-darkrose">Birthday Brunch</h4>
-                        <p class="text-sm text-textmain/80 mt-1">At your favorite spot downtown.</p>
-                    </div>
-                </div>
-                <!-- Event 2 -->
-                <div class="relative pl-6">
-                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-rosegold border-4 border-softsurface"></div>
-                    <div class="text-xs font-bold text-rosegold mb-1 tracking-wider">1:30 PM</div>
-                    <div class="bg-white p-4 rounded-xl shadow-sm border border-rosegold/10">
-                        <h4 class="font-serif font-semibold text-lg text-darkrose">Couples Massage</h4>
-                        <p class="text-sm text-textmain/80 mt-1">90 minutes of pure relaxation.</p>
-                    </div>
-                </div>
-                <!-- Event 3 -->
-                <div class="relative pl-6">
-                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-rosegold border-4 border-softsurface"></div>
-                    <div class="text-xs font-bold text-rosegold mb-1 tracking-wider">7:00 PM</div>
-                    
-                    <div id="surprise-reveal" class="bg-gradient-to-br from-rosegold to-darkrose p-1 rounded-xl cursor-pointer shadow-soft active:scale-95 transition-transform" onclick="revealSurprise(this)">
-                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg border border-white/20 text-center text-white h-32 flex flex-col items-center justify-center">
-                            <i data-feather="gift" class="w-8 h-8 mb-2 mx-auto"></i>
-                            <span class="font-medium tracking-wide">Tap to Reveal Dinner Plan</span>
-                        </div>
-                    </div>
-                    
-                    <div id="surprise-content" class="hidden bg-white p-5 rounded-xl shadow-soft border border-rosegold/20 text-center">
-                        <h4 class="font-serif font-semibold text-xl text-darkrose mb-2">Exclusive Dining</h4>
-                        <p class="text-sm text-textmain/80 mb-4">We're going to the Michelin-star restaurant you've been talking about.</p>
-                        <button class="bg-champagne/50 text-darkrose text-sm font-semibold py-2 px-6 rounded-full hover:bg-champagne transition-colors">
-                            View Tickets
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
     <!-- Bottom Navigation -->
@@ -275,12 +213,7 @@
                     <span class="text-[10px] font-medium tracking-wider">LETTER</span>
                 </button>
             </li>
-            <li>
-                <button onclick="switchView('surprise')" class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors" data-target="surprise">
-                    <i data-feather="star" class="w-5 h-5"></i>
-                    <span class="text-[10px] font-medium tracking-wider">SURPRISE</span>
-                </button>
-            </li>
+
         </ul>
     </nav>
 
@@ -358,54 +291,7 @@
             letterAnimated = true;
         }
 
-        // Surprise Reveal Logic
-        function revealSurprise(element) {
-            // Create sparkles
-            for(let i=0; i<30; i++) {
-                createSparkle(element);
-            }
-            
-            // Hide the tap button
-            element.classList.add('hidden');
-            
-            // Show content
-            const content = document.getElementById('surprise-content');
-            content.classList.remove('hidden');
-            content.style.animation = 'fadeInLine 0.8s forwards';
-        }
 
-        function createSparkle(parent) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle-particle');
-            
-            const rect = parent.getBoundingClientRect();
-            
-            // Random position within the button
-            const startX = Math.random() * rect.width;
-            const startY = Math.random() * rect.height;
-            
-            // Random trajectory
-            const angle = Math.random() * Math.PI * 2;
-            const distance = 50 + Math.random() * 100;
-            const tx = Math.cos(angle) * distance;
-            const ty = Math.sin(angle) * distance;
-            
-            sparkle.style.left = startX + 'px';
-            sparkle.style.top = startY + 'px';
-            sparkle.style.setProperty('--tx', tx + 'px');
-            sparkle.style.setProperty('--ty', ty + 'px');
-            sparkle.style.animation = `sparkleAnim ${0.5 + Math.random() * 0.5}s ease-out forwards`;
-            
-            // Colors
-            const colors = ['#b76e79', '#f7e7ce', '#fff'];
-            sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            
-            parent.appendChild(sparkle);
-            
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1000);
-        }
     </script>
 </body>
 </html>
