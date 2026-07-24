@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,10 +10,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <!-- Feather Icons for lightweight modern icons -->
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -42,14 +45,14 @@
             color: #524345;
             -webkit-tap-highlight-color: transparent;
         }
-        
+
         .view-container {
             display: none;
             opacity: 0;
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
             transform: translateY(10px);
         }
-        
+
         .view-container.active {
             display: block;
             opacity: 1;
@@ -66,13 +69,15 @@
         .polaroid {
             background: white;
             padding: 12px 12px 36px 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             transform: rotate(-2deg);
             transition: transform 0.3s ease;
         }
+
         .polaroid:nth-child(even) {
             transform: rotate(2deg);
         }
+
         .polaroid:hover {
             transform: scale(1.02) rotate(0deg);
         }
@@ -83,7 +88,7 @@
             transform: translateY(5px);
             animation: fadeInLine 1s forwards;
         }
-        
+
         @keyframes fadeInLine {
             to {
                 opacity: 1;
@@ -102,17 +107,23 @@
             position: relative;
             overflow: hidden;
         }
+
         .shimmer::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
             transform: skewX(-20deg);
             animation: shimmer 2.5s infinite;
         }
+
         @keyframes shimmer {
-            100% { left: 200%; }
+            100% {
+                left: 200%;
+            }
         }
 
 
@@ -124,16 +135,18 @@
         }
     </style>
 </head>
+
 <body class="font-sans antialiased h-screen overflow-hidden flex flex-col relative max-w-md mx-auto shadow-2xl">
 
     <!-- Top App Bar -->
-    <header class="w-full py-4 px-6 text-center z-20 bg-softsurface/90 backdrop-blur-md sticky top-0 border-b border-rosegold/10">
-        <h1 class="font-serif text-2xl font-semibold text-darkrose tracking-wide">Our Love Story</h1>
+    <header
+        class="w-full py-4 px-6 text-center z-20 bg-softsurface/90 backdrop-blur-md sticky top-0 border-b border-rosegold/10">
+        <h1 class="font-serif text-2xl font-semibold text-darkrose tracking-wide">💕Happy Birthday Anumitha💕</h1>
     </header>
 
     <!-- Main Content Area -->
     <main class="flex-1 overflow-y-auto relative pb-24 px-5">
-        
+
         <!-- View 1: Open Me (Landing) -->
         <div id="view-start" class="view-container active h-full flex flex-col items-center justify-center">
             <div class="bg-white p-8 rounded-2xl shadow-soft text-center w-full relative overflow-hidden">
@@ -145,7 +158,8 @@
                 </div>
                 <h2 class="font-serif text-3xl font-bold text-darkrose mb-3">Happy Birthday</h2>
                 <p class="text-textmain/80 mb-10 text-lg leading-relaxed">A message is waiting for you...</p>
-                <button onclick="switchView('memories')" class="shimmer bg-gradient-to-r from-rosegold to-darkrose text-white w-full py-4 rounded-xl font-semibold tracking-wider text-sm hover:shadow-lg transition-all active:scale-95 shadow-soft flex items-center justify-center gap-2">
+                <button onclick="switchView('memories')"
+                    class="shimmer bg-gradient-to-r from-rosegold to-darkrose text-white w-full py-4 rounded-xl font-semibold tracking-wider text-sm hover:shadow-lg transition-all active:scale-95 shadow-soft flex items-center justify-center gap-2">
                     OPEN ME <i data-feather="arrow-right" class="w-4 h-4"></i>
                 </button>
             </div>
@@ -157,19 +171,23 @@
                 <h2 class="font-serif text-2xl font-bold text-darkrose">Our Beautiful Moments</h2>
                 <p class="text-sm text-textmain/60 mt-2">A timeline of us.</p>
             </div>
-            
+
             <div class="space-y-8 pb-10">
                 <!-- Memory Card 1 -->
                 <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Us" class="w-full h-64 object-cover rounded-sm mb-4">
-                    <p class="font-serif text-center text-lg italic text-darkrose">The day we met</p>
+                    <img src="https://static0.howtogeekimages.com/wordpress/wp-content/uploads/2020/03/White-on-Blurple-Background-Discord.jpg"
+                        alt="Us" class="w-full h-64 object-cover rounded-sm mb-4">
+                    <p class="font-serif text-center text-lg italic text-darkrose">The day we became friends, 11/10/2025
+                    </p>
                 </div>
                 <!-- Memory Card 2 -->
                 <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Coffee date" class="w-full h-64 object-cover rounded-sm mb-4">
-                    <p class="font-serif text-center text-lg italic text-darkrose">Our first trip</p>
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Coffee date" class="w-full h-64 object-cover rounded-sm mb-4">
+                    <p class="font-serif text-center text-lg italic text-darkrose">The day we fell in Love, 13/06/2026
+                    </p>
                 </div>
-                
+
 
             </div>
         </div>
@@ -177,10 +195,12 @@
         <!-- View 3: Letter -->
         <div id="view-letter" class="view-container pt-6 h-full flex flex-col">
             <div class="w-full h-48 rounded-t-2xl letter-bg shadow-soft relative">
-                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent rounded-t-2xl"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent rounded-t-2xl">
+                </div>
             </div>
             <div class="bg-white -mt-6 p-8 rounded-2xl shadow-soft flex-1 relative z-10 mb-8">
-                <div class="w-8 h-8 bg-champagne rounded-full flex items-center justify-center absolute -top-4 right-8 shadow-sm">
+                <div
+                    class="w-8 h-8 bg-champagne rounded-full flex items-center justify-center absolute -top-4 right-8 shadow-sm">
                     <i data-feather="heart" class="text-darkrose w-4 h-4 fill-current"></i>
                 </div>
                 <div id="letter-content" class="font-serif text-lg leading-loose text-textmain space-y-4">
@@ -196,19 +216,25 @@
     <nav class="absolute bottom-0 w-full glass-nav z-30 pb-safe">
         <ul class="flex justify-around items-center p-3">
             <li>
-                <button onclick="switchView('start')" class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors" data-target="start">
+                <button onclick="switchView('start')"
+                    class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors"
+                    data-target="start">
                     <i data-feather="home" class="w-5 h-5"></i>
                     <span class="text-[10px] font-medium tracking-wider">START</span>
                 </button>
             </li>
             <li>
-                <button onclick="switchView('memories')" class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors" data-target="memories">
+                <button onclick="switchView('memories')"
+                    class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors"
+                    data-target="memories">
                     <i data-feather="image" class="w-5 h-5"></i>
                     <span class="text-[10px] font-medium tracking-wider">GALLERY</span>
                 </button>
             </li>
             <li>
-                <button onclick="switchView('letter')" class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors" data-target="letter">
+                <button onclick="switchView('letter')"
+                    class="nav-btn text-textmain/50 hover:text-rosegold flex flex-col items-center gap-1 w-16 transition-colors"
+                    data-target="letter">
                     <i data-feather="edit-2" class="w-5 h-5"></i>
                     <span class="text-[10px] font-medium tracking-wider">LETTER</span>
                 </button>
@@ -227,7 +253,7 @@
             document.querySelectorAll('.view-container').forEach(el => {
                 el.classList.remove('active');
             });
-            
+
             // Reset Nav buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('text-rosegold');
@@ -236,19 +262,19 @@
 
             // Show selected view
             const targetView = document.getElementById('view-' + viewId);
-            if(targetView) {
+            if (targetView) {
                 targetView.classList.add('active');
             }
-            
+
             // Highlight active nav
             const activeBtn = document.querySelector(`.nav-btn[data-target="${viewId}"]`);
-            if(activeBtn) {
+            if (activeBtn) {
                 activeBtn.classList.remove('text-textmain/50');
                 activeBtn.classList.add('text-rosegold');
             }
 
             // Trigger Letter Animation if letter view is selected
-            if(viewId === 'letter') {
+            if (viewId === 'letter') {
                 animateLetter();
             }
         }
@@ -261,31 +287,31 @@
         const letterText = [
             "My dearest darling,",
             "Happy Birthday. I wanted to make something special just for you this year.",
-            "Looking back at our journey, every moment with you has felt like a dream. You bring so much light and joy into my life, more than words can express.",
+            "Looking back at our journey, every moment with you has felt like a dream. You bring so much light and joy into my life, more than words that I can even express.",
             "Today is all about celebrating the incredible person you are.",
             "I love you endlessly.",
-            "Love, Alexander"
+            "Yours Lovingly, Jithesh"
         ];
-        
+
         let letterAnimated = false;
 
         function animateLetter() {
-            if(letterAnimated) return; // Only animate once
-            
+            if (letterAnimated) return; // Only animate once
+
             const container = document.getElementById('letter-content');
             container.innerHTML = ''; // Clear
-            
+
             letterText.forEach((line, index) => {
                 const p = document.createElement('p');
                 p.textContent = line;
                 p.className = 'handwritten-line';
                 p.style.animationDelay = `${index * 0.8}s`;
-                
+
                 // Add extra spacing before the sign-off
                 if (index === letterText.length - 1) {
                     p.classList.add('mt-6', 'text-right', 'font-italic');
                 }
-                
+
                 container.appendChild(p);
             });
             letterAnimated = true;
@@ -294,4 +320,5 @@
 
     </script>
 </body>
+
 </html>
